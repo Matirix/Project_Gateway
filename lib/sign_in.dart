@@ -201,40 +201,6 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(
                     height: 5,
                   ),
-                  // ElevatedButton(
-                  //   style: ElevatedButton.styleFrom(
-                  //     minimumSize: const Size(300, 45),
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(20),
-                  //       side: const BorderSide(
-                  //         color: Color(0xFF155B94),
-                  //         width: 3,
-                  //       ),
-                  //     ),
-                  //     backgroundColor: Colors.white,
-                  //   ),
-                  //   onPressed: () {
-                  //     const url =
-                  //         "https://app.oneiotaperformance.com/auth/create";
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => const WebviewScaffold(
-                  //           url: url,
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  //   child: const Text(
-                  //     'Don\'t have an account? SIGN UP',
-                  //     style: TextStyle(
-                  //       fontSize: 18,
-                  //       fontFamily: 'Inter',
-                  //       fontWeight: FontWeight.w500,
-                  //       color: Color(0xFF155B94),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ],
