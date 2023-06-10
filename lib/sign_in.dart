@@ -1,210 +1,242 @@
-// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/navigation_page.dart';
-// import '../api/auth.dart';
-// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+  const SignIn({Key? key}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Color?> _bottomColorAnimation;
+  late Animation<Color?> _topColorAnimation;
+  late Animation<Color?> _textColorAnimation;
+  late Animation<double> _logoAnimation;
 
-  //TODO: display this error messsage somewhere
-  //String? _errorMessage = '';
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 4));
 
-  // Future<void> signInWithEmailAndPassword() async {
-  //   try {
-  //     // await Auth().signInWithEmailAndPassword(
-  //     //     email: _emailController.text, password: _passwordController.text);
-  //     //TODO:Remove afterr test
-  //     await Auth().signInWithEmailAndPassword(
-  //         email: "ryanstolys+test@gmail.com", password: "1ioPerform");
-  //   } on FirebaseAuthException {
-  //     setState(() {
-  //       //_errorMessage = e.message;
-  //     });
-  //   }
-  // }
+    _bottomColorAnimation = TweenSequence(
+      [
+        TweenSequenceItem(
+          tween: ColorTween(begin: Color(0xFFFFFFFF), end: Color(0xFFD1CFE8)),
+          weight: 1,
+        ),
+        TweenSequenceItem(
+          tween: ColorTween(begin: Color(0xFFD1CFE8), end: Color(0xFFFFFFFF)),
+          weight: 1,
+        ),
+      ],
+    ).animate(_controller);
+
+    _topColorAnimation = TweenSequence(
+      [
+        TweenSequenceItem(
+          tween: ColorTween(begin: Color(0xFFD1CFE8), end: Color(0xFFFFFFFF)),
+          weight: 1,
+        ),
+        TweenSequenceItem(
+          tween: ColorTween(begin: Color(0xFFFFFFFF), end: Color(0xFFD1CFE8)),
+          weight: 1,
+        ),
+      ],
+    ).animate(_controller);
+
+    _textColorAnimation = ColorTween(begin: Colors.white, end: Colors.black).animate(_controller);
+
+    _logoAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 1.0, curve: Curves.linearToEaseOut), // Adjust the duration here
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String getLogoPath() {
+    if (_logoAnimation.value >= 0.7) {
+      return 'assets/logo_black.svg';
+    } else {
+      return 'assets/logo_white.svg';
+    }
+  }
+
+  void _showPopupWindow(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 2.8,
+            decoration: BoxDecoration(
+              color: const Color(0xFF187187),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(0.00),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Log Into Gateway',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 10.0),
+                  child: Text(
+                    'Click Face Detection Icon to Begin',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NavigationPage()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SvgPicture.asset(
+                      'assets/face_cta.svg',
+                      width: 100,
+                      height: 100,
+                    ),
+
+                  )
+                )
+
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 100,
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, _) {
+            return Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [_bottomColorAnimation.value!, _topColorAnimation.value!],
+                ),
               ),
-              Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'LOG IN',
+                  const SizedBox(height: 250),
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) {
+                      return SvgPicture.asset(
+                        getLogoPath(),
+                        width: 20,
+                        height: 20,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 50),
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) {
+                      return Text(
+                        'GATEWAY',
                         style: TextStyle(
-                          color: Color(0xFF155B94),
-                          fontSize: 35,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w800,
+                          fontFamily: 'Barlow',
+                          fontSize: 50,
+                          color: _textColorAnimation.value,
+                          letterSpacing: 4.0,
                         ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 50),
+                  _controller.value >= 0.5 ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(300, 45),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      Text(
-                        'Welcome back Doctor',
-                        style: TextStyle(
-                          color: const Color(0xFF155B94).withOpacity(0.8),
-                          fontSize: 18,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w300,
-                        ),
+                      backgroundColor: const Color(0xFF187187),
+                    ),
+                    onPressed: () {
+                      _showPopupWindow(context);
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => NavigationPage()),
+                      // );
+                    },
+                    child: const Text(
+                      'LOGIN',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
                       ),
-                    ],
+                    ),
                   )
+                      : const SizedBox(),
                 ],
               ),
-              const SizedBox(
-                height: 60,
-              ),
-              const Image(
-                image: AssetImage('assets/logo.png'),
-                height: 100,
-                width: 400,
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              const Text('Username:',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF155B94),
-                  )),
-              const SizedBox(
-                height: 5,
-              ),
-              TextField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  filled: true,
-                  fillColor: const Color(0xFFF2F2F2),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  contentPadding: const EdgeInsets.only(
-                    top: -15,
-                    left: 10,
-                    right: 10,
-                  ),
-                  labelText: 'Username',
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10), // Set border radius
-                    borderSide: const BorderSide(
-                      color: Color(0xfff1f1f1), // Customize border color
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10), // Set border radius
-                    borderSide: const BorderSide(
-                      color:
-                          Color(0xfff1f1f1), // Customize focused border color
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              const Text('Password:',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF155B94),
-                  )),
-              const SizedBox(
-                height: 5,
-              ),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  filled: true,
-                  fillColor: const Color(0xFFF2F2F2),
-                  contentPadding: const EdgeInsets.only(
-                    top: -15,
-                    left: 10,
-                    right: 10,
-                  ),
-                  labelText: 'Password',
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10), // Set border radius
-                    borderSide: const BorderSide(
-                      color: Color(0xfff1f1f1), // Customize border color
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius:
-                        BorderRadius.circular(10), // Set border radius
-                    borderSide: const BorderSide(
-                      color:
-                          Color(0xfff1f1f1), // Customize focused border color
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 55.0,
-              ),
-              Column(
-                children: [
-                  Center(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(300, 45),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        backgroundColor: const Color(0xFF155B94),
-                      ),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NavigationPage()));
-                      },
-                      child: const Text(
-                        'LOG IN',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
