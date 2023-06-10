@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prj_gateway/patient.dart';
 import 'package:prj_gateway/sign_in.dart';
+import 'appointment.dart';
 import 'open_ai.dart';
 
 Future<void> main() async {
@@ -36,6 +37,16 @@ Future<void> main() async {
   } catch (error) {
     debugPrint('Error: $error');
   }
+
+  // ------------------ Create an appointment instance for testing ------------------//
+  Appointment appointment = Appointment(
+    appointmentTime: DateTime(2023, 6, 15, 10, 30),
+    appointmentNotes: 'Follow-up appointment',
+    patient: patient,
+  );
+
+  Map<String, dynamic> appointmentJson = appointment.toJson();
+  debugPrint('Appointment JSON $appointmentJson');
 }
 
 class MyApp extends StatelessWidget {
