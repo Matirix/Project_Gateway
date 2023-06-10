@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:prj_gateway/patient.dart';
 
 class Appointment {
@@ -19,12 +20,16 @@ class Appointment {
     };
   }
 
+  String appointmentTimeHourMinute() {
+    return DateFormat.Hm().format(appointmentTime!);
+  }
+
   @override
   String toString() {
-    String patientString = patient != null ? patient.toString() : 'No patient assigned';
+    String patientString =
+        patient != null ? patient.toString() : 'No patient assigned';
     return 'Appointment Time: $appointmentTime\n'
         'Appointment Notes: $appointmentNotes\n'
         'Patient: $patientString';
   }
-
 }
