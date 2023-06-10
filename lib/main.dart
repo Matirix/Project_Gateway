@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:prj_gateway/patient.dart';
 import 'package:prj_gateway/sign_in.dart';
 import 'appointment.dart';
-import 'open_ai.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -23,21 +22,30 @@ Future<void> main() async {
         date: DateTime(2023, 6, 10),
         noteId: 'N001',
         doctorName: 'Dr. Smith',
-        content: 'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+        content:
+            'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
       ),
     ],
-    medicalHistory: ['Diagnosed in 2012, controlled through diet and exercise. No medication required.',
-      'Known allergy to penicillin.'],
+    medicalHistory: [
+      'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
+      'Known allergy to penicillin.'
+    ],
   );
 
   // ------------------ Test calling callOpenAI in open_ai.dart file ------------------//
-  try {
-    String question = "Summarize MRI records";
-    final response = await callOpenAI(1, patient, question: question);
-    debugPrint('API response: $response');
-  } catch (error) {
-    debugPrint('Error: $error');
-  }
+  // try {
+  //   String question = "Summarize MRI records";
+  //   final response = await callOpenAI(1, patient, question: question);
+  //   debugPrint('API response: $response');
+  // } catch (error) {
+  //   debugPrint('Error: $error');
+  // }
+  // try {
+  //   final response = await callOpenAI(1, patient);
+  //   debugPrint('API response: $response');
+  // } catch (error) {
+  //   debugPrint('Error: $error');
+  // }
 
   // ------------------ Create an appointment instance for testing ------------------//
   Appointment appointment = Appointment(

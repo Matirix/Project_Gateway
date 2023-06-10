@@ -53,7 +53,7 @@ Patient april = Patient(
 
 Appointment appointment = Appointment(
   appointmentTime: DateTime(2023, 6, 15, 10, 30),
-  appointmentNotes: 'Follow-up appointment',
+  appointmentNotes: 'Nausea, unstable bowels, and dizziness. ',
   patient: john,
 );
 

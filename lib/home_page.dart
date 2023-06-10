@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prj_gateway/appointment_page.dart';
 import 'package:prj_gateway/dummy_data.dart';
 import 'package:prj_gateway/utils/app_colors.dart';
 
@@ -26,9 +27,9 @@ class _HomePageState extends State<HomePage> {
           stops: [0.0, 1.0],
         ),
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Center(
         child: Container(
-          margin: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -78,7 +79,13 @@ class _HomePageState extends State<HomePage> {
                   itemCount: appointments.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AppointmentPage(
+                                    appointment: appointments[index])));
+                      },
                       child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(
