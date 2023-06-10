@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 /// This is where we can grab the colors we want to use in our app
 class AppColors extends Color {
   AppColors(super.value);
-  static Color lightGreen = const Color(0xFF87CA80);
-  static Color darkBlue = const Color(0xFF155B94);
-  static Color backgroundWhite = const Color(0xFFF5F5F5);
-  static Color darkGreen = const Color(0xFF2C6E2E);
+  static Color secondary = const Color(0xFF7EB6C3);
+  static Color focus = const Color(0xFF187187);
+  static Color listItem1border = const Color(0xff9747FF);
+  static Color listItem1card = const Color(0xffE8E7F3);
+  static Color listItem2border = const Color(0xff2F5D68);
+  static Color listItem2card = const Color(0xffCDECF3);
 }

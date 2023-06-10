@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prj_gateway/utils/app_colors.dart';
 
 class PersistentBottomBarScaffold extends StatefulWidget {
   /// pass the required items for the tabs and BottomNavigationBar
@@ -90,11 +91,11 @@ class _PersistentBottomBarScaffoldState
                 },
                 destinations: widget.items
                     .map((item) => NavigationDestination(
-                          icon: Icon(item.icon, color: Colors.grey[700]),
+                          icon: Icon(item.icon, color: AppColors.secondary),
                           label: item.title,
                           selectedIcon: Icon(
                             item.icon,
-                            color: Colors.black,
+                            color: AppColors.focus,
                           ),
                         ))
                     .toList(),
