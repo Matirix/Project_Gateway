@@ -63,6 +63,7 @@ flutter:
   assets:
     - assets/logo_white.svg
     - assets/logo_black.svg
+    - assets/face_cta.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
