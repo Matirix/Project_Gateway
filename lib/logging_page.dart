@@ -10,6 +10,7 @@ class LoggingPage extends StatefulWidget {
 
 class _LoggingPageState extends State<LoggingPage> {
   final TextEditingController prompt = TextEditingController();
+
   String responseData = '';
 
   void getResponse(String prompt) {
