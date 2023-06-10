@@ -3,6 +3,7 @@ class Patient {
   int? age;
   DateTime? dob;
   String? sex;
+  String? insuranceProvider;
   List<Drug>? medications;
   List<DoctorNote>? doctorNotes;
   List<dynamic>? medicalHistory;
@@ -12,6 +13,7 @@ class Patient {
     this.age,
     this.dob,
     this.sex,
+    this.insuranceProvider,
     this.medications,
     this.doctorNotes,
     this.medicalHistory,
@@ -33,7 +35,7 @@ class Patient {
 
 class Drug {
   String? name;
-  double? dosage;
+  String? dosage;
 
   Drug({
     this.name,
@@ -42,10 +44,12 @@ class Drug {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name
+      'name': name,
+      'dosage': dosage,
     };
   }
 }
+
 
 class DoctorNote {
   DateTime? date;
@@ -59,6 +63,11 @@ class DoctorNote {
     this.doctorName,
     this.content,
   });
+
+  @override
+  String toString() {
+    return 'Date: ${date?.toString()}, Note ID: $noteId, Doctor: $doctorName, Content: $content';
+  }
 
   Map<String, dynamic> toJson() {
     return {
