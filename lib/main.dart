@@ -32,7 +32,8 @@ Future<void> main() async {
 
   // ------------------ Test calling callOpenAI in open_ai.dart file ------------------//
   try {
-    final response = await callOpenAI(1, patient);
+    String question = "Summarize MRI records";
+    final response = await callOpenAI(1, patient, question: question);
     debugPrint('API response: $response');
   } catch (error) {
     debugPrint('Error: $error');
