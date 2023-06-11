@@ -8,7 +8,7 @@ class FilterPage extends StatefulWidget {
 class _FilterPageState extends State<FilterPage> {
   // Define your state variables here
   int _selectedSortByIndex = 0;
-  List<bool> _selectedFilterByOptions = [false, false, false];
+  final List<bool> _selectedFilterByOptions = [false, false, false, false, false, false, false];
 
   @override
   void initState() {
@@ -20,7 +20,7 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filter Page'),
+        title: const Text('Filter Page'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -154,10 +154,10 @@ class _FilterPageState extends State<FilterPage> {
                 child: Column(
                   children: [
                     CheckboxListTile(
-                      value: _selectedFilterByOptions[0],
+                      value: _selectedFilterByOptions[3],
                       onChanged: (bool? value) {
                         setState(() {
-                          _selectedFilterByOptions[0] = value!;
+                          _selectedFilterByOptions[3] = value!;
                         });
                       },
                       controlAffinity: ListTileControlAffinity.leading,
@@ -167,10 +167,10 @@ class _FilterPageState extends State<FilterPage> {
                       ),
                     ),
                     CheckboxListTile(
-                      value: _selectedFilterByOptions[1],
+                      value: _selectedFilterByOptions[4],
                       onChanged: (bool? value) {
                         setState(() {
-                          _selectedFilterByOptions[1] = value!;
+                          _selectedFilterByOptions[4] = value!;
                         });
                       },
                       controlAffinity: ListTileControlAffinity.leading,
@@ -180,10 +180,10 @@ class _FilterPageState extends State<FilterPage> {
                       ),
                     ),
                     CheckboxListTile(
-                      value: _selectedFilterByOptions[2],
+                      value: _selectedFilterByOptions[5],
                       onChanged: (bool? value) {
                         setState(() {
-                          _selectedFilterByOptions[2] = value!;
+                          _selectedFilterByOptions[5] = value!;
                         });
                       },
                       controlAffinity: ListTileControlAffinity.leading,
@@ -193,10 +193,10 @@ class _FilterPageState extends State<FilterPage> {
                       ),
                     ),
                     CheckboxListTile(
-                      value: _selectedFilterByOptions[2],
+                      value: _selectedFilterByOptions[6],
                       onChanged: (bool? value) {
                         setState(() {
-                          _selectedFilterByOptions[2] = value!;
+                          _selectedFilterByOptions[6] = value!;
                         });
                       },
                       controlAffinity: ListTileControlAffinity.leading,
@@ -214,7 +214,7 @@ class _FilterPageState extends State<FilterPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Perform any action on filter button press
+          Navigator.pop(context, _selectedSortByIndex);
         },
         // child: Text("Apply"),
         child: const Icon(Icons.check),
