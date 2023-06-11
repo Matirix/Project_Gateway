@@ -366,6 +366,31 @@ class _AppointmentPageState extends State<AppointmentPage> {
               child: const Text('Button'),
             ),
           ),
+        Container(
+          margin: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+
+            border: Border.all(
+                color: AppColors.focus), // Set the desired border color
+            borderRadius:
+                BorderRadius.circular(10), // Set the desired border radius
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.add_circle_outline,
+                color: AppColors.focus,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text("Clinical Notes",
+                  style: TextStyle(color: AppColors.focus, fontSize: 16)),
+            ],
+          ),
+        ),
       ],
     );
   }
