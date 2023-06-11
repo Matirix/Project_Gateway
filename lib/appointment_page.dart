@@ -1,10 +1,16 @@
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:prj_gateway/appointment.dart';
 import 'package:prj_gateway/utils/app_colors.dart';
+import 'package:prj_gateway/utils/pdfscreen.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-
 import 'open_ai.dart';
+
 
 class AppointmentPage extends StatefulWidget {
   const AppointmentPage({super.key, required this.appointment});
@@ -21,6 +27,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
+  int? _pages = 0;
+  bool isReady = false;
+  String pathPDF = "";
+
 
   @override
   void initState() {
@@ -28,6 +38,12 @@ class _AppointmentPageState extends State<AppointmentPage> {
     name = widget.appointment.patient!.name!;
     notes = widget.appointment.appointmentNotes!;
     _initSpeech();
+
+    fromAsset('assets/mri_knee_sample.pdf', 'demo.pdf').then((f) {
+      setState(() {
+        pathPDF = f.path;
+      });
+    });
   }
 
   void _initSpeech() async {
@@ -106,7 +122,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             patientHeader(),
-            appointmentNotes(context),
+            appointmentNotes(context, true),
             generateResponse(),
             // doctorNotes(),
             Column(
@@ -248,7 +264,63 @@ class _AppointmentPageState extends State<AppointmentPage> {
     );
   }
 
-  Column appointmentNotes(BuildContext context) {
+  Future<File> fromAsset(String asset, String filename) async {
+    Completer<File> completer = Completer();
+
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/$filename");
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
+  }
+
+  // void showPdfPopup(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         child: Container(
+  //           height: MediaQuery.of(context).size.height * 0.9,
+  //           width: MediaQuery.of(context).size.width * 1.0,
+  //           child: Column(
+  //             children: [
+  //               Expanded(
+  //                 child: PDFView(
+  //                   filePath: 'assets/mri_knee_sample.pdf',
+  //                   enableSwipe: true,
+  //                   swipeHorizontal: true,
+  //                   autoSpacing: false,
+  //                   pageFling: false,
+  //                   onRender: (_pages) {
+  //                     setState(() {
+  //                       _pages = _pages;
+  //                       isReady = true;
+  //                     });
+  //                   },
+  //                 ),
+  //               ),
+  //               ElevatedButton(
+  //                 onPressed: () {
+  //                   Navigator.of(context).pop(); // Close the popup
+  //                 },
+  //                 child: const Text('Close'),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  Column appointmentNotes(BuildContext context, bool showButton) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -260,8 +332,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
           height: 125,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: AppColors.listItem1card)),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: AppColors.listItem1card),
+          ),
           margin: const EdgeInsets.only(top: 10),
           padding: const EdgeInsets.all(10),
           child: Center(
@@ -272,9 +345,29 @@ class _AppointmentPageState extends State<AppointmentPage> {
             ),
           ),
         ),
+        if (showButton) // Conditionally show the button if showButton is true
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+              onPressed: () {
+                if (pathPDF.isNotEmpty) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PDFScreen(path: pathPDF),
+                    ),
+                  );
+                }
+                // Handle button click event
+              },
+              child: const Text('Button'),
+            ),
+          ),
       ],
     );
   }
+
+
 
   Container patientHeader() {
     return Container(
@@ -309,3 +402,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
     );
   }
 }
+
+
+
+

@@ -34,6 +34,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
 
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -41,6 +42,8 @@ dependencies:
   intl: ^0.18.1
   speech_to_text: ^6.1.1
   loading_animation_widget: ^1.2.0+4
+  flutter_pdfview: ^1.3.1
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +72,7 @@ flutter:
     - assets/logo_white.svg
     - assets/logo_black.svg
     - assets/face_cta.svg
+    - assets/mri_knee_sample.pdf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
