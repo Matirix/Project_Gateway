@@ -1,5 +1,4 @@
 import 'package:prj_gateway/patient.dart';
-
 import 'appointment.dart';
 
 Patient john = Patient(
@@ -18,143 +17,145 @@ Patient john = Patient(
       noteId: 'N001',
       doctorName: 'Dr. Smith',
       content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+          'The purpose of this note is to provide information regarding John\'s respiratory infection and necessary medical attention.',
+    ),
+    DoctorNote(
+      date: DateTime(2023, 6, 12),
+      noteId: 'N002',
+      doctorName: 'Dr. Johnson',
+      content:
+          'Follow-up appointment. John\'s condition has improved. Prescribed antibiotics for another week.',
     ),
     DoctorNote(
       date: DateTime(2023, 6, 15),
-      noteId: 'N001',
-      doctorName: 'Dr. Smith',
+      noteId: 'N003',
+      doctorName: 'Dr. Rodriguez',
       content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
-    ),
-    DoctorNote(
-      date: DateTime(2023, 6, 13),
-      noteId: 'N001',
-      doctorName: 'Dr. Smith',
-      content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+          'Johns respiratory infection has resolved. Advised to follow up if symptoms reappear.',
     ),
   ],
   medicalHistory: [
-    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
-    'Known allergy to penicillin.'
+    'Diagnosed with asthma in 2010. Uses inhaler as needed.',
+    'No known allergies.',
   ],
 );
+
 Patient april = Patient(
   name: 'April Doe',
-  age: 30,
-  dob: DateTime(1992, 10, 15),
-  sex: 'M',
+  age: 25,
+  dob: DateTime(1997, 4, 5),
+  sex: 'F',
   insuranceProvider: 'Blue Cross Insurance',
   medications: [
-    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
-    Drug(name: 'Loratadine', dosage: "0.5mg"),
+    Drug(name: 'Ibuprofen', dosage: "200mg"),
+    Drug(name: 'Loratadine', dosage: "10mg"),
   ],
   doctorNotes: [
     DoctorNote(
       date: DateTime(2023, 6, 10),
       noteId: 'N001',
-      doctorName: 'Dr. Smith',
+      doctorName: 'Dr. Johnson',
       content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+          'April had a minor injury and required stitches. The wound is healing well.',
     ),
   ],
   medicalHistory: [
-    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
-    'Known allergy to penicillin.'
+    'No major medical conditions.',
+    'Allergic to shellfish.',
   ],
 );
 
 Patient matthew = Patient(
   name: 'Matthew Doe',
-  age: 30,
-  dob: DateTime(1992, 10, 15),
+  age: 40,
+  dob: DateTime(1983, 8, 20),
   sex: 'M',
-  insuranceProvider: 'Blue Cross Insurance',
+  insuranceProvider: 'Green Leaf Insurance',
   medications: [
-    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
-    Drug(name: 'Loratadine', dosage: "0.5mg"),
+    Drug(name: 'Metformin', dosage: "1000mg"),
+    Drug(name: 'Lisinopril', dosage: "10mg"),
   ],
   doctorNotes: [
     DoctorNote(
       date: DateTime(2023, 6, 10),
       noteId: 'N001',
-      doctorName: 'Dr. Smith',
+      doctorName: 'Dr. Thompson',
       content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+          'Matthew has been managing his diabetes well. No significant changes in his condition.',
     ),
   ],
   medicalHistory: [
-    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
-    'Known allergy to penicillin.'
+    'Type 2 diabetes diagnosed in 2010. Requires regular blood sugar monitoring.',
+    'No known allergies.',
   ],
 );
 
 Patient gareth = Patient(
   name: 'Gareth Doe',
-  age: 30,
-  dob: DateTime(1992, 10, 15),
+  age: 52,
+  dob: DateTime(1971, 12, 12),
   sex: 'M',
-  insuranceProvider: 'Blue Cross Insurance',
+  insuranceProvider: 'Red Shield Insurance',
   medications: [
-    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
-    Drug(name: 'Loratadine', dosage: "0.5mg"),
+    Drug(name: 'Atorvastatin', dosage: "20mg"),
+    Drug(name: 'Aspirin', dosage: "81mg"),
   ],
   doctorNotes: [
     DoctorNote(
       date: DateTime(2023, 6, 10),
       noteId: 'N001',
-      doctorName: 'Dr. Smith',
+      doctorName: 'Dr. Wilson',
       content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+          'Gareth has high cholesterol levels. Recommending dietary changes and medication.',
     ),
   ],
   medicalHistory: [
-    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
-    'Known allergy to penicillin.'
+    'High blood pressure diagnosed in 2005. Takes medication to control it.',
+    'No known allergies.',
   ],
 );
+
 Patient heidi = Patient(
   name: 'Heidi Doe',
-  age: 30,
-  dob: DateTime(1992, 10, 15),
-  sex: 'M',
-  insuranceProvider: 'Blue Cross Insurance',
+  age: 35,
+  dob: DateTime(1988, 7, 30),
+  sex: 'F',
+  insuranceProvider: 'Purple Health Insurance',
   medications: [
-    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
-    Drug(name: 'Loratadine', dosage: "0.5mg"),
+    Drug(name: 'Sertraline', dosage: "50mg"),
+    Drug(name: 'Lorazepam', dosage: "1mg"),
   ],
   doctorNotes: [
     DoctorNote(
       date: DateTime(2023, 6, 10),
       noteId: 'N001',
-      doctorName: 'Dr. Smith',
+      doctorName: 'Dr. Rodriguez',
       content:
-          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+          'Heidi is experiencing symptoms of anxiety. Prescribing medication and therapy.',
     ),
   ],
   medicalHistory: [
-    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
-    'Known allergy to penicillin.'
+    'No major medical conditions.',
+    'No known allergies.',
   ],
 );
 
 Appointment appointment = Appointment(
   appointmentTime: DateTime(2023, 6, 15, 10, 30),
-  appointmentNotes: 'Nausea, unstable bowels, and dizziness. ',
+  appointmentNotes: 'Nausea, unstable bowels, and dizziness.',
   patient: john,
 );
 
 Appointment appointment1 = Appointment(
   appointmentTime: DateTime(2023, 6, 15, 11, 30),
   appointmentNotes: 'Follow-up appointment',
-  patient: john,
+  patient: heidi,
 );
 
 Appointment appointment2 = Appointment(
   appointmentTime: DateTime(2023, 6, 15, 12, 30),
   appointmentNotes: 'Follow-up appointment',
-  patient: april,
+  patient: gareth,
 );
 
 Appointment appointment3 = Appointment(
@@ -166,7 +167,7 @@ Appointment appointment3 = Appointment(
 Appointment appointment4 = Appointment(
   appointmentTime: DateTime(2023, 6, 15, 12, 30),
   appointmentNotes: 'Follow-up appointment',
-  patient: april,
+  patient: matthew,
 );
 
 List<Appointment> appointments = [
@@ -174,6 +175,7 @@ List<Appointment> appointments = [
   appointment1,
   appointment2,
   appointment3,
-  appointment4
+  appointment4,
 ];
+
 List<Patient> patients = [john, april, matthew, gareth, heidi];

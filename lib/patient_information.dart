@@ -241,8 +241,18 @@ class _PatientInformationState extends State<PatientInformation> {
                           color: AppColors.listItem1border,
                           width: 1.0,
                         ),
-                        color: AppColors.listItem1border.withOpacity(0.1),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(
+                                0.4), // Set the desired shadow color
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: const Offset(
+                                0, 2), // Set the desired offset for the shadow
+                          ),
+                        ],
                       ),
                       child: ListTile(
                         title: Text(
@@ -259,12 +269,6 @@ class _PatientInformationState extends State<PatientInformation> {
                             fontSize: 14,
                           ),
                         ),
-                        // subtitle: Text(
-                        //   patient.doctorNotes![index].note ?? "N/A",
-                        //   style: const TextStyle(
-                        //       fontSize: 14,
-                        //       fontWeight: FontWeight.bold),
-                        // ),
                       ),
                     );
                   }),
