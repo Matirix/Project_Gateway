@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj_gateway/patient.dart';
 import 'package:prj_gateway/sign_in.dart';
+import 'package:prj_gateway/utils/app_colors.dart';
 import 'appointment.dart';
 
 Future<void> main() async {
@@ -83,7 +84,28 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.focus),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: AppColors.focus,
+                width: 0.5,
+              ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            backgroundColor: Colors.white,
+          ),
+        ),
+        // buttonTheme: const ButtonThemeData(
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.all(
+        //       Radius.circular(20),
+        //     ),
+        //   ),
+        //   buttonColor: Colors.white,
+        //   textTheme: ButtonTextTheme.primary,
+        // ),
         textTheme: GoogleFonts.barlowTextTheme(
           Theme.of(context).textTheme,
         ),
