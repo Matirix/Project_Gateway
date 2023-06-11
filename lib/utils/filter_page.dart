@@ -143,7 +143,7 @@ class _FilterPageState extends State<FilterPage> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
                 child: Text(
                   "Topic",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF187187)),
@@ -216,8 +216,8 @@ class _FilterPageState extends State<FilterPage> {
         onPressed: () {
           // Perform any action on filter button press
         },
-        child: Text("Apply"),
-        // child: Icon(Icons.filter_list),
+        // child: Text("Apply"),
+        child: const Icon(Icons.check),
       ),
     );
   }
