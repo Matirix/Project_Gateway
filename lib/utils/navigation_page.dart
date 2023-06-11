@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:prj_gateway/logging_page.dart';
+import 'package:prj_gateway/patients_page.dart';
 import 'package:prj_gateway/utils/persistent_bottom_bar_scaffold.dart';
 
 import '../home_page.dart';
-import '../patients.dart';
 // import 'package:one_iota_mobile_app/utils/persistent_bottom_bar_scaffold.dart';
 // import 'package:one_iota_mobile_app/screens/habit_feature/habit_main.dart';
 // import 'package:one_iota_mobile_app/screens/home_page.dart';
@@ -33,7 +33,7 @@ class NavigationPage extends StatelessWidget {
           navigatorkey: _tab1navigatorKey,
         ),
         PersistentTabItem(
-          tab: const Patients(),
+          tab: const PatientsPage(),
           icon: Icons.people,
           title: 'Patients',
           navigatorkey: _tab2navigatorKey,

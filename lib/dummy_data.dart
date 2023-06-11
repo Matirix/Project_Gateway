@@ -51,6 +51,80 @@ Patient april = Patient(
   ],
 );
 
+Patient matthew = Patient(
+  name: 'Matthew Doe',
+  age: 30,
+  dob: DateTime(1992, 10, 15),
+  sex: 'M',
+  insuranceProvider: 'Blue Cross Insurance',
+  medications: [
+    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
+    Drug(name: 'Loratadine', dosage: "0.5mg"),
+  ],
+  doctorNotes: [
+    DoctorNote(
+      date: DateTime(2023, 6, 10),
+      noteId: 'N001',
+      doctorName: 'Dr. Smith',
+      content:
+          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+    ),
+  ],
+  medicalHistory: [
+    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
+    'Known allergy to penicillin.'
+  ],
+);
+
+Patient gareth = Patient(
+  name: 'Gareth Doe',
+  age: 30,
+  dob: DateTime(1992, 10, 15),
+  sex: 'M',
+  insuranceProvider: 'Blue Cross Insurance',
+  medications: [
+    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
+    Drug(name: 'Loratadine', dosage: "0.5mg"),
+  ],
+  doctorNotes: [
+    DoctorNote(
+      date: DateTime(2023, 6, 10),
+      noteId: 'N001',
+      doctorName: 'Dr. Smith',
+      content:
+          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+    ),
+  ],
+  medicalHistory: [
+    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
+    'Known allergy to penicillin.'
+  ],
+);
+Patient heidi = Patient(
+  name: 'Heidi Doe',
+  age: 30,
+  dob: DateTime(1992, 10, 15),
+  sex: 'M',
+  insuranceProvider: 'Blue Cross Insurance',
+  medications: [
+    Drug(name: 'Fluoxetine', dosage: "2.5mg"),
+    Drug(name: 'Loratadine', dosage: "0.5mg"),
+  ],
+  doctorNotes: [
+    DoctorNote(
+      date: DateTime(2023, 6, 10),
+      noteId: 'N001',
+      doctorName: 'Dr. Smith',
+      content:
+          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+    ),
+  ],
+  medicalHistory: [
+    'Diagnosed in 2012, controlled through diet and exercise. No medication required.',
+    'Known allergy to penicillin.'
+  ],
+);
+
 Appointment appointment = Appointment(
   appointmentTime: DateTime(2023, 6, 15, 10, 30),
   appointmentNotes: 'Nausea, unstable bowels, and dizziness. ',
@@ -88,3 +162,4 @@ List<Appointment> appointments = [
   appointment3,
   appointment4
 ];
+List<Patient> patients = [john, april, matthew, gareth, heidi];

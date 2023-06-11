@@ -11,7 +11,6 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'open_ai.dart';
 
-
 class AppointmentPage extends StatefulWidget {
   const AppointmentPage({super.key, required this.appointment});
   final Appointment appointment;
@@ -27,10 +26,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
-  int? _pages = 0;
+  final int _pages = 0;
   bool isReady = false;
   String pathPDF = "";
-
 
   @override
   void initState() {
@@ -131,9 +129,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text("Hold down to record inquiry",
-                    style:
-                        TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
+                // const Text("Hold down to record inquiry",
+                //     style:
+                //         TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -151,11 +149,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
                           ? _startListening()
                           : _stopListening();
                     },
-                    // icon: const Icon(
-                    //   Icons.mic_rounded,
-                    //   size: 50.0,
-                    //   color: Colors.white,
-                    // ),
                     icon: Icon(
                         _speechToText.isNotListening
                             ? Icons.mic_off
@@ -368,8 +361,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
     );
   }
 
-
-
   Container patientHeader() {
     return Container(
       // margin: const EdgeInsets.all(20),
@@ -388,7 +379,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 ),
               ),
               const Text(
-                "Last check up, etc months ago.",
+                "See Patient Profile",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -403,7 +394,3 @@ class _AppointmentPageState extends State<AppointmentPage> {
     );
   }
 }
-
-
-
-
