@@ -34,7 +34,7 @@ Future<String> callOpenAI(int promptOption, Patient patient, {String? question})
   } else if (promptOption == 3) {
     // medical history summary
     prompt = "A patient has the following medical history: $medicalHistory. Provide a paragraph summary of the patient's medical history";
-  } else {
+  } else if (promptOption == 4) {
     // random question
     prompt = "Here is some information about a patient: name is ${patient.name}, "
         "age is ${patient.age}, dob is ${patient.dob}, insurance provider is ${patient.insuranceProvider},"
@@ -42,6 +42,9 @@ Future<String> callOpenAI(int promptOption, Patient patient, {String? question})
         "Patient's medical history: $medicalHistory\nCould you answer this question given the above"
         "patient information: $question.\nIf you do not have the answer, specifically and only say "
         "there is insufficient information provided to determine. Limit the response to a short paragraph.";
+  } else {
+    // test results summary
+    prompt = "Could you provide a short paragraph summary of the following information: $question";
   }
 
   debugPrint("PROMPT: $prompt");
