@@ -365,13 +365,11 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 if (pathPDF.isNotEmpty) {
 
                   //Load an existing PDF document.
-                  PdfDocument document =
-                  PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
+                  PdfDocument document = PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
                   PdfTextExtractor extractor = PdfTextExtractor(document);
                   String text = extractor.extractText();
                   print("extracted data");
                   print(text);
-
 
                   // Navigator.push(
                   //   context,
