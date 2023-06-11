@@ -10,6 +10,7 @@ import 'package:prj_gateway/utils/pdfscreen.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'open_ai.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class AppointmentPage extends StatefulWidget {
   const AppointmentPage({super.key, required this.appointment});
@@ -360,12 +361,22 @@ class _AppointmentPageState extends State<AppointmentPage> {
             child: ElevatedButton(
               onPressed: () {
                 if (pathPDF.isNotEmpty) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PDFScreen(path: pathPDF),
-                    ),
-                  );
+
+                  //Load an existing PDF document.
+                  PdfDocument document =
+                  PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
+                  PdfTextExtractor extractor = PdfTextExtractor(document);
+                  String text = extractor.extractText();
+                  print("extracted data");
+                  print(text);
+
+
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => PDFScreen(path: pathPDF),
+                  //   ),
+                  // );
                 }
                 // Handle button click event
               },
