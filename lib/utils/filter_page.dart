@@ -216,7 +216,8 @@ class _FilterPageState extends State<FilterPage> {
         onPressed: () {
           // Perform any action on filter button press
         },
-        child: Icon(Icons.filter_list),
+        child: Text("Apply"),
+        // child: Icon(Icons.filter_list),
       ),
     );
   }
