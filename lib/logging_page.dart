@@ -139,12 +139,13 @@ class _LoggingPageState extends State<LoggingPage> {
                                 ),
                                 child: const ListTile(
                                   leading: Row(children: [
-Text(
+                                    Text(
                                       "09:00",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
-                                    )                                    Text(
+                                    ),
+                                    Text(
                                       "Name",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
