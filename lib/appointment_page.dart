@@ -205,6 +205,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
         ),
         const Text("Quick Search:",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(
+          height: 15,
+        ),
         Wrap(direction: Axis.horizontal, spacing: 5.5, children: [
           ElevatedButton(
               onPressed: () {
@@ -331,6 +334,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
           "Appointment Notes:",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
+        const SizedBox(
+          height: 15,
+        ),
         Container(
           height: 125,
           width: MediaQuery.of(context).size.width,
@@ -363,7 +369,21 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 }
                 // Handle button click event
               },
-              child: const Text('Button'),
+              child: const Wrap(
+                children: [
+                  Icon(Icons.document_scanner),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 3.0),
+                    child: Text(
+                      'MRI Test Results_06-09-2023',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
       ],

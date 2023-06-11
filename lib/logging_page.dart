@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:prj_gateway/patient.dart';
-import 'package:prj_gateway/utils/custom_app_bar.dart';
 import '../open_ai.dart';
 
 class LoggingPage extends StatefulWidget {
@@ -48,7 +47,13 @@ class _LoggingPageState extends State<LoggingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your logic here
+          // This callback will be invoked when the button is pressed
+        },
+        child: const Icon(Icons.add),
+      ),
       body: Center(
           child: Column(
         children: [
