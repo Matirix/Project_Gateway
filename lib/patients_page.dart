@@ -38,17 +38,22 @@ class _PatientsPageState extends State<PatientsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "A",
+                            "NAME",
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FilterPage()),
+                              onPressed: () async {
+                                final selectedFilters = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => FilterPage()),
                                 );
+
+                                if (selectedFilters != null) {
+                                  print(selectedFilters);
+                                  // Do something with selectedFilters
+                                  // Example: Update the patient list based on the selected filters
+                                }
                               },
                               child: const Row(
                                 children: [
