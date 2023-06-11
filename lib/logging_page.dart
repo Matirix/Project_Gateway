@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prj_gateway/patient.dart';
-import 'package:prj_gateway/utils/custom_app_bar.dart';
+import 'package:prj_gateway/utils/app_colors.dart';
 import '../open_ai.dart';
 
 class LoggingPage extends StatefulWidget {
@@ -48,43 +48,115 @@ class _LoggingPageState extends State<LoggingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
-      body: Center(
-          child: Column(
-        children: [
-          TextField(
-            controller: prompt,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              filled: true,
-              fillColor: const Color(0xFFF2F2F2),
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              contentPadding: const EdgeInsets.only(
-                top: -15,
-                left: 10,
-                right: 10,
-              ),
-              labelText: 'Prompt',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10), // Set border radius
-                borderSide: const BorderSide(
-                  color: Color(0xfff1f1f1), // Customize border color
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10), // Set border radius
-                borderSide: const BorderSide(
-                  color: Color(0xfff1f1f1), // Customize focused border color
-                ),
+        // appBar: CustomAppBar(),
+        body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFFFFFFFF), // Ending color (#FFFFFF)
+                  Color(0xFFEEF2FF), // Starting color (#EEF2FF)
+                ],
+                stops: [0.0, 1.0],
               ),
             ),
-          ),
-          ElevatedButton(
-              onPressed: () => getResponse(prompt.text),
-              child: const Text('Submit')),
-          Text(responseData),
-        ],
-      )),
-    );
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Center(
+                child: Container(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  SizedBox(
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.family_restroom_outlined,
+                          color: AppColors.secondary,
+                          fill: 0.0,
+                        ),
+                        const Text(
+                          "Paulius Russel, MD",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const Text(
+                          "Family Doctor",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Recent Logs",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: 3,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.listItem1border,
+                                    width: 1.0,
+                                  ),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(
+                                          0.4), // Set the desired shadow color
+                                      spreadRadius: 2,
+                                      blurRadius: 4,
+                                      offset: const Offset(0,
+                                          2), // Set the desired offset for the shadow
+                                    ),
+                                  ],
+                                ),
+                                child: const ListTile(
+                                  leading: Row(children: [
+Text(
+                                      "09:00",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    )                                    Text(
+                                      "Name",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    )
+                                  ]),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ]),
+                ])))));
   }
 }

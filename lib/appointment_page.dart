@@ -177,7 +177,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                         // recognition is not yet ready or not supported on
                         // the target device
                         : _speechEnabled
-                            ? 'Press the microphone to start listening...'
+                            ? 'Press the microphone to start listening and to stop'
                             : 'Speech not available, check permissions',
                   ),
                 ),
