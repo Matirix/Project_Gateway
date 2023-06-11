@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Patient {
   String? name;
   int? age;
@@ -32,7 +34,6 @@ class Patient {
   }
 }
 
-
 class Drug {
   String? name;
   String? dosage;
@@ -50,7 +51,6 @@ class Drug {
   }
 }
 
-
 class DoctorNote {
   DateTime? date;
   String? noteId;
@@ -67,6 +67,10 @@ class DoctorNote {
   @override
   String toString() {
     return 'Date: ${date?.toString()}, Note ID: $noteId, Doctor: $doctorName, Content: $content';
+  }
+
+  String appointmentDateFormatted() {
+    return DateFormat('MM-dd-yyyy').format(date!);
   }
 
   Map<String, dynamic> toJson() {

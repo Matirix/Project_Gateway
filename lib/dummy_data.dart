@@ -14,7 +14,21 @@ Patient john = Patient(
   ],
   doctorNotes: [
     DoctorNote(
-      date: DateTime(2023, 6, 10),
+      date: DateTime(2023, 6, 11),
+      noteId: 'N001',
+      doctorName: 'Dr. Smith',
+      content:
+          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+    ),
+    DoctorNote(
+      date: DateTime(2023, 6, 15),
+      noteId: 'N001',
+      doctorName: 'Dr. Smith',
+      content:
+          'The purpose of this note is to provide information regarding their respiratory infection and necessary medical attention.',
+    ),
+    DoctorNote(
+      date: DateTime(2023, 6, 13),
       noteId: 'N001',
       doctorName: 'Dr. Smith',
       content:
