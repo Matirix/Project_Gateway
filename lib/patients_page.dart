@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prj_gateway/dummy_data.dart';
 import 'package:prj_gateway/patient_information.dart';
 import 'package:prj_gateway/utils/app_colors.dart';
+import 'package:prj_gateway/utils/filter_page.dart';
 
 class PatientsPage extends StatefulWidget {
   const PatientsPage({super.key});
@@ -42,7 +43,13 @@ class _PatientsPageState extends State<PatientsPage> {
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FilterPage()),
+                                );
+                              },
                               child: const Row(
                                 children: [
                                   Text("Filter",

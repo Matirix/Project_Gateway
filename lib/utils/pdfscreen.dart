@@ -1,10 +1,6 @@
 import 'dart:async';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-
-
 
 class PDFScreen extends StatefulWidget {
   final String? path;
