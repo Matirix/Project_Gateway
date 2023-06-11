@@ -120,18 +120,27 @@ class _AppointmentPageState extends State<AppointmentPage> {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            const SizedBox(height: 60),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                ),
+                const Text("Back")
+              ],
+            ),
             patientHeader(),
             appointmentNotes(context, true),
             generateResponse(),
             // doctorNotes(),
             Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                // const Text("Hold down to record inquiry",
-                //     style:
-                //         TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -366,7 +375,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
       // margin: const EdgeInsets.all(20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         const SizedBox(
-          height: 125,
+          height: 15,
         ),
         SizedBox(
           child: Column(

@@ -131,14 +131,30 @@ class _CustomAppBarState extends State<CustomAppBar> {
     );
   }
 
+  Row backButton() {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+        ),
+        const Text("Back")
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       title: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: appBar(),
-      ),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: backButton()),
       // centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
