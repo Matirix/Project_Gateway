@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Today's Appintments",
+                  Text("Today's Appointments",
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ],

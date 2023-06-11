@@ -205,6 +205,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
         ),
         const Text("Quick Search:",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        const SizedBox(
+          height: 15,
+        ),
         Wrap(direction: Axis.horizontal, spacing: 5.5, children: [
           ElevatedButton(
               onPressed: () {
@@ -330,6 +333,9 @@ class _AppointmentPageState extends State<AppointmentPage> {
         const Text(
           "Appointment Notes:",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        const SizedBox(
+          height: 15,
         ),
         Container(
           height: 125,
