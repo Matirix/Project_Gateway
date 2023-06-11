@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/navigation_page.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -15,20 +16,25 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
   late Animation<Color?> _topColorAnimation;
   late Animation<Color?> _textColorAnimation;
   late Animation<double> _logoAnimation;
+  late Animation<double> _buttonAnimation;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 4));
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 4));
 
     _bottomColorAnimation = TweenSequence(
       [
         TweenSequenceItem(
-          tween: ColorTween(begin: Color(0xFFFFFFFF), end: Color(0xFFD1CFE8)),
+          tween: ColorTween(
+              begin: const Color(0xFFFFFFFF), end: const Color(0xFFD1CFE8)),
           weight: 1,
         ),
         TweenSequenceItem(
-          tween: ColorTween(begin: Color(0xFFD1CFE8), end: Color(0xFFFFFFFF)),
+          tween: ColorTween(
+              begin: const Color(0xFFD1CFE8), end: const Color(0xFFFFFFFF)),
           weight: 1,
         ),
       ],
@@ -37,22 +43,33 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
     _topColorAnimation = TweenSequence(
       [
         TweenSequenceItem(
-          tween: ColorTween(begin: Color(0xFFD1CFE8), end: Color(0xFFFFFFFF)),
+          tween: ColorTween(
+              begin: const Color(0xFFD1CFE8), end: const Color(0xFFFFFFFF)),
           weight: 1,
         ),
         TweenSequenceItem(
-          tween: ColorTween(begin: Color(0xFFFFFFFF), end: Color(0xFFD1CFE8)),
+          tween: ColorTween(
+              begin: const Color(0xFFFFFFFF), end: const Color(0xFFD1CFE8)),
           weight: 1,
         ),
       ],
     ).animate(_controller);
 
-    _textColorAnimation = ColorTween(begin: Colors.white, end: Colors.black).animate(_controller);
+    _textColorAnimation =
+        ColorTween(begin: Colors.white, end: Colors.black).animate(_controller);
 
     _logoAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.0, 1.0, curve: Curves.linearToEaseOut), // Adjust the duration here
+        curve: const Interval(0.0, 1.0,
+            curve: Curves.easeInOut), // Adjust the duration here
+      ),
+    );
+
+    _buttonAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.9, 1.0, curve: Curves.easeIn),
       ),
     );
 
@@ -134,23 +151,30 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NavigationPage()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: SvgPicture.asset(
-                      'assets/face_cta.svg',
-                      width: 100,
-                      height: 100,
-                    ),
-
-                  )
-                )
-
+                    onTap: () {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      _showPopupWindow(context);
+                      Future.delayed(const Duration(seconds: 2), () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NavigationPage()));
+                      });
+                    },
+                    child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: isLoading
+                            ? LoadingAnimationWidget.prograssiveDots(
+                                color: Colors.white,
+                                size: 100,
+                              )
+                            : SvgPicture.asset(
+                                'assets/face_cta.svg',
+                                width: 100,
+                                height: 100,
+                              )))
               ],
             ),
           ),
@@ -174,7 +198,10 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [_bottomColorAnimation.value!, _topColorAnimation.value!],
+                  colors: [
+                    _bottomColorAnimation.value!,
+                    _topColorAnimation.value!
+                  ],
                 ),
               ),
               child: Column(
@@ -184,10 +211,13 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                   AnimatedBuilder(
                     animation: _controller,
                     builder: (context, _) {
-                      return SvgPicture.asset(
-                        getLogoPath(),
-                        width: 20,
-                        height: 20,
+                      return Opacity(
+                        opacity: _logoAnimation.value,
+                        child: SvgPicture.asset(
+                          getLogoPath(),
+                          width: 20,
+                          height: 20,
+                        ),
                       );
                     },
                   ),
@@ -195,44 +225,57 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                   AnimatedBuilder(
                     animation: _controller,
                     builder: (context, _) {
-                      return Text(
-                        'GATEWAY',
-                        style: TextStyle(
-                          fontFamily: 'Barlow',
-                          fontSize: 50,
-                          color: _textColorAnimation.value,
-                          letterSpacing: 4.0,
+                      return Opacity(
+                        opacity: _logoAnimation.value,
+                        child: Text(
+                          'GATEWAY',
+                          style: TextStyle(
+                            fontFamily: 'Barlow',
+                            fontSize: 50,
+                            color: _textColorAnimation.value,
+                            letterSpacing: 4.0,
+                          ),
                         ),
                       );
                     },
                   ),
                   const SizedBox(height: 50),
-                  _controller.value >= 0.5 ? ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(300, 45),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      backgroundColor: const Color(0xFF187187),
-                    ),
-                    onPressed: () {
-                      _showPopupWindow(context);
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => NavigationPage()),
-                      // );
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) {
+                      return Opacity(
+                        opacity:
+                            _buttonAnimation.value, // Use the button animation
+                        child: _controller.value >= 0.7
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(300, 45),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  backgroundColor: const Color(0xFF187187),
+                                ),
+                                onPressed: () {
+                                  _showPopupWindow(context);
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(builder: (context) => NavigationPage()),
+                                  // );
+                                },
+                                child: const Text(
+                                  'LOGIN',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(),
+                      );
                     },
-                    child: const Text(
-                      'LOGIN',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                      : const SizedBox(),
+                  ),
                 ],
               ),
             );
