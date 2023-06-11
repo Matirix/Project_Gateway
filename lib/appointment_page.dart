@@ -378,33 +378,19 @@ class _AppointmentPageState extends State<AppointmentPage> {
               onPressed: () {
                 if (pathPDF.isNotEmpty) {
                   //Load an existing PDF document.
-<<<<<<< HEAD
-                  PdfDocument document = PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
-=======
                   PdfDocument document =
-                      PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
->>>>>>> c42c5db41b6783e9c42b326512e899b2da841fa3
+                  PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
                   PdfTextExtractor extractor = PdfTextExtractor(document);
                   String text = extractor.extractText();
-                  print("extracted data");
-                  print(text);
                   extractedText = text;
 
-<<<<<<< HEAD
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => PDFScreen(path: pathPDF),
-                  //   ),
-                  // );
-=======
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => PDFScreen(path: pathPDF),
                     ),
                   );
->>>>>>> c42c5db41b6783e9c42b326512e899b2da841fa3
+
                 }
                 // Handle button click event
               },
