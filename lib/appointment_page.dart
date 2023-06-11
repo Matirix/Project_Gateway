@@ -148,7 +148,11 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.red, width: 2.0),
+                    border: Border.all(
+                        color: _speechToText.isNotListening
+                            ? Colors.red.withOpacity(0.5)
+                            : Colors.red,
+                        width: 2.0),
                     color: _speechToText.isNotListening
                         ? Colors.red.withOpacity(0.5)
                         : Colors.red,
@@ -160,9 +164,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                           : _stopListening();
                     },
                     icon: Icon(
-                        _speechToText.isNotListening
-                            ? Icons.mic_off
-                            : Icons.mic,
+                        _speechToText.isNotListening ? Icons.mic : Icons.mic,
                         size: 50.0,
                         color: Colors.white),
                   ),
