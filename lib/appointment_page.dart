@@ -47,6 +47,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
   /// listen method.
   void _stopListening() async {
     await _speechToText.stop();
+    response = callOpenAI(4, widget.appointment.patient!, question: _lastWords);
     setState(() {});
   }
 

@@ -97,6 +97,15 @@ class _HomePageState extends State<HomePage> {
                             color: index % 2 == 0
                                 ? AppColors.listItem1card
                                 : AppColors.listItem2card,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 0,
+                                blurRadius: 5,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ],
                           ),
                           padding: const EdgeInsets.all(15),
                           margin: const EdgeInsets.all(10),
