@@ -6,11 +6,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:prj_gateway/appointment.dart';
 import 'package:prj_gateway/utils/app_colors.dart';
-import 'package:prj_gateway/utils/pdfscreen.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'open_ai.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
+
+import 'utils/pdfscreen.dart';
 
 class AppointmentPage extends StatefulWidget {
   const AppointmentPage({super.key, required this.appointment});
@@ -21,6 +22,7 @@ class AppointmentPage extends StatefulWidget {
 }
 
 class _AppointmentPageState extends State<AppointmentPage> {
+  String extractedText = "";
   String name = "N/A";
   String notes = "";
   Future<String>? response;
@@ -76,6 +78,12 @@ class _AppointmentPageState extends State<AppointmentPage> {
 
   Future<void> getResponse(int prompt) async {
     response = callOpenAI(prompt, widget.appointment.patient!);
+    setState(() {});
+  }
+
+  Future<void> getTestResult(int prompt, String question) async {
+    response =
+        callOpenAI(prompt, widget.appointment.patient!, question: question);
     setState(() {});
   }
 
@@ -227,6 +235,12 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 getResponse(2);
               },
               child: const Text("Drug Interactions")),
+          ElevatedButton(
+              onPressed: () {
+                print("LINE 240 $extractedText");
+                getTestResult(5, extractedText);
+              },
+              child: const Text("Summarize MRI")),
         ]),
       ],
     );
@@ -363,22 +377,21 @@ class _AppointmentPageState extends State<AppointmentPage> {
             child: ElevatedButton(
               onPressed: () {
                 if (pathPDF.isNotEmpty) {
-
                   //Load an existing PDF document.
                   PdfDocument document =
-                  PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
+                      PdfDocument(inputBytes: File(pathPDF).readAsBytesSync());
                   PdfTextExtractor extractor = PdfTextExtractor(document);
                   String text = extractor.extractText();
                   print("extracted data");
                   print(text);
+                  extractedText = text;
 
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => PDFScreen(path: pathPDF),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PDFScreen(path: pathPDF),
+                    ),
+                  );
                 }
                 // Handle button click event
               },
