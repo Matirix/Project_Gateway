@@ -333,8 +333,8 @@ class _AppointmentPageState extends State<AppointmentPage> {
         ),
         Container(
           height: 125,
-          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: AppColors.listItem1card),
           ),
@@ -363,19 +363,33 @@ class _AppointmentPageState extends State<AppointmentPage> {
                 }
                 // Handle button click event
               },
-              child: const Text('Button'),
+              child: const Wrap(
+                children: [
+                  Icon(Icons.document_scanner),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 3.0),
+                    child: Text(
+                      'MRI Test Results_06-09-2023',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         Container(
           margin: const EdgeInsets.only(top: 10),
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
 
             border: Border.all(
                 color: AppColors.focus), // Set the desired border color
             borderRadius:
-                BorderRadius.circular(10), // Set the desired border radius
+                BorderRadius.circular(20), // Set the desired border radius
           ),
           child: Row(
             children: [
