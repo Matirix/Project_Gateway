@@ -3,6 +3,7 @@ import 'package:prj_gateway/dummy_data.dart';
 import 'package:prj_gateway/patient_information.dart';
 import 'package:prj_gateway/utils/app_colors.dart';
 import 'package:prj_gateway/utils/filter_page.dart';
+import 'patient.dart';
 
 class PatientsPage extends StatefulWidget {
   const PatientsPage({super.key});
@@ -12,6 +13,30 @@ class PatientsPage extends StatefulWidget {
 }
 
 class _PatientsPageState extends State<PatientsPage> {
+
+  List<Patient> sortedPatients = [];
+
+  @override
+  void initState() {
+    super.initState();
+    sortPatients();
+  }
+
+  void sortPatients() {
+    // Filter and sort the patients' names alphabetically
+    sortedPatients = patients.toList();
+    sortedPatients.sort((a, b) => a.name!.compareTo(b.name!));
+  }
+
+  void sortPatientsReverse() {
+    // Filter and sort the patients' names in reverse alphabetical order
+    sortedPatients = patients.toList();
+    sortedPatients.sort((a, b) => b.name!.compareTo(a.name!));
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,9 +75,16 @@ class _PatientsPageState extends State<PatientsPage> {
                                 );
 
                                 if (selectedFilters != null) {
-                                  print(selectedFilters);
                                   // Do something with selectedFilters
                                   // Example: Update the patient list based on the selected filters
+
+                                  if (selectedFilters == 0) {
+                                    sortPatients(); // Sort the patients if selectedFilters is 0
+                                  } else if (selectedFilters == 1) {
+                                    sortPatientsReverse(); // Sort the patients in reverse order if selectedFilters is 1
+                                  }
+
+                                  setState(() {});
                                 }
                               },
                               child: const Row(
@@ -70,7 +102,7 @@ class _PatientsPageState extends State<PatientsPage> {
                           height: MediaQuery.of(context).size.height * 0.6,
                           child: ListView.builder(
                               padding: EdgeInsets.zero,
-                              itemCount: patients.length,
+                              itemCount: sortedPatients.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Container(
                                   decoration: BoxDecoration(
@@ -80,16 +112,15 @@ class _PatientsPageState extends State<PatientsPage> {
                                   ),
                                   child: ListTile(
                                     contentPadding: EdgeInsets.zero,
-                                    title: Text(patients[index].name ?? "N/A"),
-                                    trailing:
-                                        const Icon(Icons.arrow_forward_ios),
+                                    title: Text(sortedPatients[index].name ?? "N/A"),
+                                    trailing: const Icon(Icons.arrow_forward_ios),
                                     onTap: () {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 PatientInformation(
-                                                    patient: patients[index])),
+                                                    patient: sortedPatients[index])),
                                       );
                                     },
                                   ),
