@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class ClinicalNote {
   final DateTime? date;
   final String? patientName;
@@ -13,6 +15,14 @@ class ClinicalNote {
       'patientName': patientName,
       'content': content,
     };
+  }
+
+  String appointmentTimeHourMinute() {
+    return DateFormat.Hm().format(date!);
+  }
+
+  String appointmentDateFormatted() {
+    return DateFormat('MM-dd-yyyy').format(date!);
   }
 
   @override

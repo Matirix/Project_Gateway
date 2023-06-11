@@ -1,5 +1,6 @@
 import 'package:prj_gateway/patient.dart';
 import 'appointment.dart';
+import 'clinical_note.dart';
 
 Patient john = Patient(
   name: 'John Doe',
@@ -179,3 +180,26 @@ List<Appointment> appointments = [
 ];
 
 List<Patient> patients = [john, april, matthew, gareth, heidi];
+
+var note1 = ClinicalNote(
+  date: DateTime(2023, 6, 9),
+  patientName: 'Heidi Doe',
+  content:
+      'Patient presented with flu-like symptoms. Prescribed antiviral medication and advised rest.',
+);
+
+var note2 = ClinicalNote(
+  date: DateTime(2023, 6, 10),
+  patientName: 'Matthew Doe',
+  content:
+      'Patient came in for a follow-up after surgery. Incision healing well. Removed sutures and provided instructions for wound care.',
+);
+
+var note3 = ClinicalNote(
+  date: DateTime.now(),
+  patientName: 'Gareth Doe',
+  content:
+      'Patient reported persistent headache. Conducted neurological examination and referred for further tests.',
+);
+
+List<ClinicalNote> clinicalNotes = [note1, note2, note3];
