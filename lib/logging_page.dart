@@ -112,7 +112,7 @@ class _LoggingPageState extends State<LoggingPage> {
                           height: 10,
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.55,
+                          height: MediaQuery.of(context).size.height * 0.50,
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
                             itemCount: clinicalNotes.length,
@@ -257,6 +257,33 @@ class _LoggingPageState extends State<LoggingPage> {
                                     ],
                                   ));
                             },
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+
+                            border: Border.all(
+                                color: AppColors
+                                    .focus), // Set the desired border color
+                            borderRadius: BorderRadius.circular(
+                                10), // Set the desired border radius
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add_circle_outline,
+                                color: AppColors.focus,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("Clinical Notes",
+                                  style: TextStyle(
+                                      color: AppColors.focus, fontSize: 16)),
+                            ],
                           ),
                         ),
                       ]),
